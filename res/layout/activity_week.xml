@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:id="@+id/gridView"
+	    android:layout_gravity="center">
+
+	<TableRow 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" >
+	
+	        <Button 
+	            android:id="@+id/one"
+			    android:layout_width="70dp"
+			    android:layout_height="110dp" 
+			    android:background="@drawable/water"
+			    android:layout_margin="20dp" />
+	        
+	         <Button 
+	            android:id="@+id/two"
+			    android:layout_width="70dp"
+			    android:layout_height="110dp" 
+			    android:background="@drawable/water"
+			    android:layout_margin="20dp" />
+	         <Button
+	            android:id="@+id/three" 
+			   	android:layout_width="70dp"
+			    android:layout_height="110dp" 
+			    android:background="@drawable/water"
+			    android:layout_margin="20dp" />
+	</TableRow>
+	<TableRow 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" >
+	
+	        <Button 
+	            android:id="@+id/four"
+			    android:layout_width="70dp"
+			    android:layout_height="110dp" 
+			    android:background="@drawable/water"
+			    android:layout_margin="20dp"/>
+	        
+	         <Button 
+	            android:id="@+id/five"
+			    android:layout_width="70dp"
+			    android:layout_height="110dp" 
+			    android:background="@drawable/water"
+			    android:layout_margin="20dp" />
+	         <Button
+	            android:id="@+id/six" 
+			   	android:layout_width="70dp"
+			    android:layout_height="110dp" 
+			    android:background="@drawable/water"
+			    android:layout_margin="20dp" />
+	</TableRow>
+	<TableRow 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" >
+	
+	        <Button 
+	            android:id="@+id/seven"
+			    android:layout_width="70dp"
+			    android:layout_height="110dp" 
+			    android:background="@drawable/water"
+			    android:layout_margin="20dp"/>
+	        
+	         <Button 
+	            android:id="@+id/eight"
+			    android:layout_width="70dp"
+			    android:layout_height="110dp" 
+			    android:background="@drawable/water"
+			    android:layout_margin="20dp"/>
+	         <Button
+	            android:id="@+id/nine" 
+			   	android:layout_width="70dp"
+			    android:layout_height="110dp" 
+			    android:background="@drawable/water"
+			    android:layout_margin="20dp" />
+	</TableRow>
+	
+</TableLayout>

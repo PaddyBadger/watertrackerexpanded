@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:id="@+id/gridView"
+	    android:layout_gravity="center">
+
+	<TableRow 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" >
+	
+	        <ToggleButton 
+	            android:id="@+id/one"
+			    android:layout_width="60dp"
+			    android:layout_height="100dp" 
+			    android:background="@drawable/check"
+			    android:layout_margin="20dp"
+			    android:textOn=""
+			    android:textOff=""
+			    android:onClick="onToggleClicked" />
+	         <ToggleButton 
+	            android:id="@+id/two"
+			    android:layout_width="60dp"
+			    android:layout_height="100dp" 
+			    android:background="@drawable/check"
+			    android:layout_margin="20dp"
+			    android:textOn=""
+			    android:textOff=""
+			    android:onClick="onToggleClicked" />
+	         <ToggleButton
+	            android:id="@+id/three" 
+			   	android:layout_width="60dp"
+			    android:layout_height="100dp" 
+			    android:background="@drawable/check"
+			    android:layout_margin="20dp"
+			    android:textOn=""
+			    android:textOff=""
+			    android:onClick="onToggleClicked" />
+	</TableRow>
+	<TableRow 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" >
+	
+	        <ToggleButton 
+	            android:id="@+id/four"
+			    android:layout_width="60dp"
+			    android:layout_height="100dp" 
+			    android:background="@drawable/check"
+			    android:layout_margin="20dp"
+			    android:textOn=""
+			    android:textOff=""
+			    android:onClick="onToggleClicked"/>
+	         <ToggleButton 
+	            android:id="@+id/five"
+			    android:layout_width="60dp"
+			    android:layout_height="100dp" 
+			    android:background="@drawable/check"
+			    android:layout_margin="20dp"
+			    android:textOn=""
+			    android:textOff=""
+			    android:onClick="onToggleClicked" />
+	         <ToggleButton
+	            android:id="@+id/six" 
+			   	android:layout_width="60dp"
+			    android:layout_height="100dp" 
+			    android:background="@drawable/check"
+			    android:layout_margin="20dp"
+			    android:textOn=""
+			    android:textOff=""
+			    android:onClick="onToggleClicked" />
+	</TableRow>
+	<TableRow 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" >
+	
+	        <ToggleButton 
+	            android:id="@+id/seven"
+			    android:layout_width="60dp"
+			    android:layout_height="100dp" 
+			    android:background="@drawable/check"
+			    android:layout_margin="20dp"
+			    android:textOn=""
+			    android:textOff=""
+			    android:onClick="onToggleClicked" />
+	         <ToggleButton 
+	            android:id="@+id/eight"
+			    android:layout_width="60dp"
+			    android:layout_height="100dp" 
+			    android:background="@drawable/check"
+			    android:layout_margin="20dp"
+			    android:textOn=""
+			    android:textOff=""
+			    android:onClick="onToggleClicked"/>
+	         <ToggleButton
+	            android:id="@+id/nine" 
+			   	android:layout_width="60dp"
+			    android:layout_height="100dp" 
+			    android:background="@drawable/check"
+			    android:layout_margin="20dp"
+			    android:textOn=""
+			    android:textOff=""
+			    android:onClick="onToggleClicked" />
+	</TableRow>
+</TableLayout>
