@@ -3,6 +3,7 @@ package com.paddy.android.watertracker;
 import java.util.Date;
 import android.text.format.DateFormat;
 import android.text.format.Time;
+import android.util.Log;
 
 
 public class TimeManager {
@@ -12,7 +13,9 @@ public class TimeManager {
 	
 	public CharSequence currentDate() {
 		Date now = new Date();
-		CharSequence date = DateFormat.format("EEEE,  MMM d, yyyy", now.getTime());
+		CharSequence date = DateFormat.format("yyyy.MM.d EEEE", now.getTime());
+		
+		Log.i("the date format is", "this" + date);
 		return date;
 	}
 	

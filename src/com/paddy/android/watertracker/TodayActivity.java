@@ -1,25 +1,20 @@
 package com.paddy.android.watertracker;
 
-import com.paddy.android.watertracker.NavigationFragment;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.app.Activity;
 import android.app.AlarmManager;
-import android.app.FragmentManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.app.FragmentTransaction;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.TableRow;
 
-public class TodayActivity extends Activity implements OnClickListener{
+public class TodayActivity extends Activity{
 	public static final String TAG = "MA";
 	public int glassesCount;
 	public int glassesToDrink = 9;
@@ -27,19 +22,11 @@ public class TodayActivity extends Activity implements OnClickListener{
 	public ToggleButton[] buttons;
 	public TimeManager timeNow = new TimeManager();
 	public ResetGlasses reset = new ResetGlasses();
-	public Button week;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		
-		NavigationFragment navigation = new NavigationFragment();
-		FragmentManager manager = getFragmentManager();
-		FragmentTransaction transaction = manager.beginTransaction();
-		transaction.add(R.id.navigation1, navigation, "NavigationFragment");
-		transaction.commit();
-	
+		setContentView(R.layout.activity_main);	
 	}
 	
 	protected void onResume() {
@@ -47,7 +34,6 @@ public class TodayActivity extends Activity implements OnClickListener{
 		setContentView(R.layout.activity_main);
 		
 		resetGlasses();
-		
 		setGlasses();
 		setAlarm();	
 	}
@@ -65,13 +51,6 @@ public class TodayActivity extends Activity implements OnClickListener{
 		editor.commit();
 		
 		glassesCount = 0;
-	}
-	
-	@Override
-	public void onClick(View v) {
-		Intent i = new Intent(TodayActivity.this, WeekActivity.class);
-		TodayActivity.this.startActivity(i);
-		
 	}
 	
 	public void onToggleClicked(View v) {
@@ -137,7 +116,7 @@ public class TodayActivity extends Activity implements OnClickListener{
         
        } else if (glassesCount > 1 && glassesCount < 9){
     	   Toast.makeText(TodayActivity.this,  "Way to go! " + glassesCount + " Glasses of water drunk today. "+ glassesToDrink + " Left today. You should drink a glass of water every " 
-             + rateOfDrinking() + " hours to reach the target",  Toast.LENGTH_SHORT).show();  
+             + rateOfDrinking() + " hour to reach the target",  Toast.LENGTH_SHORT).show();  
        } else if (glassesCount == 0 ) {
     	   Toast.makeText(TodayActivity.this,  "Better get drinking, you're on 0." ,  Toast.LENGTH_SHORT).show();
        } else {
@@ -204,5 +183,10 @@ public class TodayActivity extends Activity implements OnClickListener{
 			SharedPreferences.Editor editor = sharedPref.edit();
 			editor.clear();
 			editor.commit();
+	}
+	
+	public void weekActivity(View v) {
+		Intent i = new Intent(this, WeekActivity.class);
+		startActivity(i);
 	}
 }

@@ -25,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.paddy.android.watertracker.remindmeWeekActivity"></activity>
+        <activity android:name="com.paddy.android.watertracker.WeekActivity"></activity>
         <service android:name="com.paddy.android.watertracker.NotificationHandler" />
         <service
             android:name="com.paddy.android.watertracker.NotificationCreator"
