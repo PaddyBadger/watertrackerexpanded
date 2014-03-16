@@ -19,7 +19,7 @@
 					    android:layout_width="80dp"
 				    	android:layout_height="110dp" 
 				    	android:layout_margin="10dp"
-					    android:background="@drawable/water" />
+					     />
 			        
 			         <Button 
 			            android:id="@+id/two"
