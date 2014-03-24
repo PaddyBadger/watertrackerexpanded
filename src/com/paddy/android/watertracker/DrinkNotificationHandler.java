@@ -10,7 +10,7 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.util.Log;
 
-public class NotificationHandler extends Service {
+public class DrinkNotificationHandler extends Service {
 	public static final String TAG = "NH";
 	private WakeLock mWakeLock;
 	
@@ -38,7 +38,7 @@ public class NotificationHandler extends Service {
 		@Override
 		protected Void doInBackground(Void... params) {
 			Log.i("doInBackground", "called");
-			startService(new Intent(NotificationHandler.this, NotificationCreator.class));
+			startService(new Intent(DrinkNotificationHandler.this, DrinkNotificationCreator.class));
 			return null;
 		}
 		

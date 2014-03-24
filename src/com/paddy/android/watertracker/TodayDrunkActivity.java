@@ -1,22 +1,25 @@
 package com.paddy.android.watertracker;
 
-import android.os.Bundle;
-import android.os.SystemClock;
+import java.util.Arrays;
+
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-import android.widget.TableRow;
 
-public class TodayActivity extends Activity{
-	public static final String TAG = "MA";
-	public int glassesCount;
+public class TodayDrunkActivity extends Activity{
+	private static final String TAG = "MA";
+	private int glassesCount;
 	public int glassesToDrink = 9;
 	public int DEFAULT = 0;
 	public ToggleButton[] buttons;
@@ -26,13 +29,29 @@ public class TodayActivity extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		Log.d(TAG, "today: " + GlassCountHelper.getTodaysCheckedGlasses(this));
+		Log.d(TAG, "week: " + GlassCountHelper.getLastWeeksCheckedGlasses(this));
+		Log.d(TAG, "month: " + GlassCountHelper.getLastMonthsCheckedGlasses(this));
+		
+		// set
+		GlassCountHelper.setTodaysCheckedGlasses(this, Arrays.asList(2, 4, 6));
+
+		Log.d(TAG, "today: " + GlassCountHelper.getTodaysCheckedGlasses(this));
+		Log.d(TAG, "week: " + GlassCountHelper.getLastWeeksCheckedGlasses(this));
+		Log.d(TAG, "month: " + GlassCountHelper.getLastMonthsCheckedGlasses(this));
+		
+		
 		setContentView(R.layout.activity_main);	
+		resetGlasses();
+		setGlasses();
+		setAlarm();	
 	}
 	
+	@Override
 	protected void onResume() {
 		super.onResume();
-		setContentView(R.layout.activity_main);
-		
+		setContentView(R.layout.activity_main);	
 		resetGlasses();
 		setGlasses();
 		setAlarm();	
@@ -111,16 +130,16 @@ public class TodayActivity extends Activity{
 	
 	public void displayTracking (int glassesCount) {
 		if (glassesCount == 1) {
-            Toast.makeText(TodayActivity.this,  "Way to go! " + glassesCount + " Glass of water drunk today. " + glassesToDrink + " Left today. You should drink a glass of water every " 
+            Toast.makeText(TodayDrunkActivity.this,  "Way to go! " + glassesCount + " Glass of water drunk today. " + glassesToDrink + " Left today. You should drink a glass of water every " 
              + rateOfDrinking() + " hours to reach the target",  Toast.LENGTH_SHORT).show();  
         
        } else if (glassesCount > 1 && glassesCount < 9){
-    	   Toast.makeText(TodayActivity.this,  "Way to go! " + glassesCount + " Glasses of water drunk today. "+ glassesToDrink + " Left today. You should drink a glass of water every " 
+    	   Toast.makeText(TodayDrunkActivity.this,  "Way to go! " + glassesCount + " Glasses of water drunk today. "+ glassesToDrink + " Left today. You should drink a glass of water every " 
              + rateOfDrinking() + " hour to reach the target",  Toast.LENGTH_SHORT).show();  
        } else if (glassesCount == 0 ) {
-    	   Toast.makeText(TodayActivity.this,  "Better get drinking, you're on 0." ,  Toast.LENGTH_SHORT).show();
+    	   Toast.makeText(TodayDrunkActivity.this,  "Better get drinking, you're on 0." ,  Toast.LENGTH_SHORT).show();
        } else {
-    	   Toast.makeText(TodayActivity.this,  "Way to go! You have reached the target!" ,  Toast.LENGTH_SHORT).show();
+    	   Toast.makeText(TodayDrunkActivity.this,  "Way to go! You have reached the target!" ,  Toast.LENGTH_SHORT).show();
        }
 	}
 	
@@ -154,7 +173,7 @@ public class TodayActivity extends Activity{
 		SharedPreferences sharedPref = getSharedPreferences("TotalGlasses", Context.MODE_PRIVATE);
 		int hours = sharedPref.getInt("interval", 0);
 		AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-		Intent i = new Intent(this, NotificationHandler.class);
+		Intent i = new Intent(this, DrinkNotificationHandler.class);
 		PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
 		am.cancel(pi);
 		

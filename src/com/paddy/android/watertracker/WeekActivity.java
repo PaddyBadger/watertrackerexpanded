@@ -32,17 +32,15 @@ public class WeekActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_week);
-		
 		getData();
 		setText();
 		getGlassNumber();
-		setDrawables();	
+		setDrawables();
 	}
 	
 	protected void onResume(Bundle savedInstanceState) {
 		super.onResume();
 		setContentView(R.layout.activity_week);
-		
 		getData();
 		setText();
 		getGlassNumber();
@@ -50,43 +48,61 @@ public class WeekActivity extends Activity {
 	}
 	
 	public void todayActivity(View v) {
-		Intent i = new Intent(this, TodayActivity.class);
+		Intent i = new Intent(this, TodayDrunkActivity.class);
 		startActivity(i);
 	}
 	
 	public void getData() {
 		SharedPreferences sharedPref = getSharedPreferences("TotalGlasses", Context.MODE_PRIVATE);
-		Map<String, ?> all = sharedPref.getAll();
-		
-		List<Map.Entry<String, ?>> sortedGlasses = new ArrayList<Map.Entry<String, ?>>(all.entrySet());		
-		Collections.sort(sortedGlasses, new Comparator<Map.Entry<String, ?>>() {
-
-			public int compare(Map.Entry<String, ?> a, Map.Entry<String, ?> b) {
-				 return a.getKey().compareTo(b.getKey());
+	
+		if (sharedPref != null) {
+			
+			Map<String, ?> all = sharedPref.getAll();
+			
+			if (all.size() < 9) {
+				int dataSize = all.size();
+				int addThese = 9 - dataSize;
+				for (int i = 0; i < addThese; i ++) {
+//					all.add(Map<"2014.01.01", 0>);
+				}
 			}
-		});
-		
-		if (sortedGlasses.size() > 9) {
-			int dataSize = sortedGlasses.size();
-			int removeThese = dataSize - 9;
-			for (int i = 0; i < removeThese; i ++)
-				sortedGlasses.remove(i);
+			
+			List<Map.Entry<String, ?>> sortedGlasses = new ArrayList<Map.Entry<String, ?>>(all.entrySet());		
+			Collections.sort(sortedGlasses, new Comparator<Map.Entry<String, ?>>() {
+	
+				public int compare(Map.Entry<String, ?> a, Map.Entry<String, ?> b) {
+				
+					 return a.getKey().compareTo(b.getKey());
+					 }
+			});
+			
+			
+			
+			if (sortedGlasses.size() > 9) {
+				int dataSize = sortedGlasses.size();
+				int removeThese = dataSize - 9;
+				for (int i = 0; i < removeThese; i ++)
+					sortedGlasses.remove(i);
+			}
+			
+			String glassesString = new String();
+			glassesString = sortedGlasses.toString();
+			
+			String[] glassesStringSplit = new String[20];
+			try {
+				glassesStringSplit = glassesString.split(" ");
+			} catch (PatternSyntaxException ex) {
+				Log.i("there was an error", "on split");
+			}
+			 
+			for (int i = 1; i < glassesStringSplit.length;i+=2) {
+				String glassString = glassesStringSplit[i].replace(",","").replace("=", " ").replace("]", "");
+				glassText.add(glassString);	
+			}
+		} else {
+			buttonDrawables(0);
 		}
 		
-		String glassesString = new String();
-		glassesString = sortedGlasses.toString();
-		
-		String[] glassesStringSplit = new String[20];
-		try {
-			glassesStringSplit = glassesString.split(" ");
-		} catch (PatternSyntaxException ex) {
-			Log.i("there was an error", "on split");
-		}
-		 
-		for (int i = 1; i < glassesStringSplit.length;i+=2) {
-			String glassString = glassesStringSplit[i].replace(",","").replace("=", " ").replace("]", "");
-			glassText.add(glassString);	
-		}
 	}
 	
 	public void getGlassNumber() {
@@ -120,7 +136,7 @@ public class WeekActivity extends Activity {
 		case 6: return R.drawable.waterdrunk6;
 		case 7: return R.drawable.waterdrunk7;
 		case 8: return R.drawable.waterdrunk8;
-		case 9: return R.drawable.waterdrunk;
+		case 9: return R.drawable.waterdrunk; 
 		}
 	 return R.drawable.water;
 	}

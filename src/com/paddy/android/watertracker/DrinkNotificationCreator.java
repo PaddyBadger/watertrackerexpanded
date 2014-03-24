@@ -10,7 +10,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
-public class NotificationCreator extends Service {
+public class DrinkNotificationCreator extends Service {
 	
 	public int onStartCommand(final Intent intent, final int flags, final int startId) {
 		       createNotification();
@@ -26,11 +26,11 @@ public class NotificationCreator extends Service {
 			notificationBuilder.setContentText("Time to drink!");
 			notificationBuilder.setAutoCancel(true);
 			
-			Intent intent = new Intent(this, TodayActivity.class);
+			Intent intent = new Intent(this, TodayDrunkActivity.class);
 			Log.i("createNotification", "I get to line 5");
 		
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-		stackBuilder.addParentStack(TodayActivity.class);
+		stackBuilder.addParentStack(TodayDrunkActivity.class);
 		stackBuilder.addNextIntent(intent);
 		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 		
