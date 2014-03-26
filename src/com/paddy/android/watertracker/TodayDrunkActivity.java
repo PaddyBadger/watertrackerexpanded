@@ -3,6 +3,7 @@ package com.paddy.android.watertracker;
 import java.util.Arrays;
 import java.util.List;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +30,11 @@ public class TodayDrunkActivity extends Activity{
 	protected void onPause() {
 		super.onPause();
 		
+	}
+	
+	public void weekActivity(View v) {
+		Intent i = new Intent(this, WeekActivity.class);
+		startActivity(i);
 	}
 	
 	public void setCheckedGlasses() {
