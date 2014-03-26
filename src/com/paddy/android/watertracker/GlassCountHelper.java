@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.text.format.DateFormat;
+import android.util.Log;
 
 public final class GlassCountHelper {
 	private static final String SHARED_PREFS = "GlassesCountPrefs";
@@ -23,10 +24,10 @@ public final class GlassCountHelper {
 	
 	private GlassCountHelper() {}
 	
-	public static Set<Integer> getTodaysCheckedGlasses(Context context) {
+	public static List<Integer> getTodaysCheckedGlasses(Context context) {
 		SharedPreferences sharedPreferences = getSharedPreferences(context);
 
-		Set<Integer> checkedIndices = new HashSet<Integer>();
+		List<Integer> checkedIndices = new ArrayList<Integer>();
 			
 		Date today = new Date();
 		for (int i = 0; i < NUM_GLASSES; i++) {

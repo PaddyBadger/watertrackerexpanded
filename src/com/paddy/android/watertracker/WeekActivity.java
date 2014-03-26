@@ -32,19 +32,12 @@ public class WeekActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_week);
-		getData();
-		setText();
-		getGlassNumber();
-		setDrawables();
+		
 	}
 	
 	protected void onResume(Bundle savedInstanceState) {
 		super.onResume();
-		setContentView(R.layout.activity_week);
-		getData();
-		setText();
-		getGlassNumber();
-		setDrawables();
+		
 	}
 	
 	public void todayActivity(View v) {
