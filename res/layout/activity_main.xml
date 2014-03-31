@@ -115,27 +115,19 @@
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal" 
 	    android:layout_gravity="bottom" >
-
-		<Button
-		    android:id="@+id/month_button"
-		    style="?android:attr/buttonStyleSmall"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_weight="1"
-		    android:text="@string/month" />
 	
 	    <Button
 	        android:id="@+id/week_button"
-	        style="?android:attr/buttonStyleSmall"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
 	        android:text="@string/week"
+	        style="@style/activityButtons"
 	        android:onClick="weekActivity" />
 	
 	    <Button
 	        android:id="@+id/day_button"
-	        style="?android:attr/buttonStyleSmall"
+	        style="@style/activityButtons"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"

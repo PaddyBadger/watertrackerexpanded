@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -18,29 +15,26 @@ import android.util.Log;
 
 public final class GlassCountHelper {
 	private static final String SHARED_PREFS = "GlassesCountPrefs";
-	private static final int NUM_GLASSES = 9;
+	private static final int NUM_GLASSES = 10;
 	private static final long MILLIS_IN_DAY = 1000*60*60*24;
-	
-	
 	private GlassCountHelper() {}
 	
 	public static List<Integer> getTodaysCheckedGlasses(Context context) {
 		SharedPreferences sharedPreferences = getSharedPreferences(context);
-
+		
 		List<Integer> checkedIndices = new ArrayList<Integer>();
-			
+		
 		Date today = new Date();
-		for (int i = 0; i < NUM_GLASSES; i++) {
+		for (int i = 1; i < NUM_GLASSES; i++) {
 			if (sharedPreferences.getBoolean(getKey(today, i), false)) {
 				checkedIndices.add(i);
 			}
-		}
+		}	
 		return checkedIndices;
 	}
 	
 	public static Map<Date, Integer> getLastWeeksCheckedGlasses(Context context) {
 		return getRecentGlasses(context, 9);
-		
 	}
 	
 	public static Map<Date, Integer> getLastMonthsCheckedGlasses(Context context) {

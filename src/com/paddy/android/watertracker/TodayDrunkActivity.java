@@ -28,8 +28,7 @@ public class TodayDrunkActivity extends Activity{
 	}
 	
 	protected void onPause() {
-		super.onPause();
-		
+		super.onPause();	
 	}
 	
 	public void weekActivity(View v) {
@@ -40,30 +39,38 @@ public class TodayDrunkActivity extends Activity{
 	public void setCheckedGlasses() {
 		List<Integer> checkedGlasses = GlassCountHelper.getTodaysCheckedGlasses(this);
 		
-		Log.i("GlassesHelper.get ", "" + GlassCountHelper.getTodaysCheckedGlasses(this));
-		
 		for (int i = 0; i < checkedGlasses.size(); i++ ) {
 			glassesCount ++;
-			glassesToDrink --;;
+			glassesToDrink --;
+			
 			switch (checkedGlasses.get(i)) {
 			case 1: ((ToggleButton) findViewById(R.id.one)).setChecked(true); 
-			break;
+					checked[0] = 1;
+					break;
 			case 2: ((ToggleButton) findViewById(R.id.two)).setChecked(true);
-			break;
+					checked[1] = 2;
+					break;
 			case 3: ((ToggleButton) findViewById(R.id.three)).setChecked(true);
-			break;
+					checked[2] = 3;
+					break;
 			case 4: ((ToggleButton) findViewById(R.id.four)).setChecked(true);
-			break;
+					checked[3] = 4;
+					break;
 			case 5: ((ToggleButton) findViewById(R.id.five)).setChecked(true);
-			break;
+					checked[4] = 5;	
+					break;
 			case 6: ((ToggleButton) findViewById(R.id.six)).setChecked(true);
-			break;
+					checked[5] = 6;
+					break;
 			case 7: ((ToggleButton) findViewById(R.id.seven)).setChecked(true);
-			break;
+					checked[6] = 7;
+					break;
 			case 8: ((ToggleButton) findViewById(R.id.eight)).setChecked(true);
-			break;
+					checked[7] = 8;
+					break;
 			case 9: ((ToggleButton) findViewById(R.id.nine)).setChecked(true);
-			break;
+					checked[8] = 9;
+					break;
 			}
 		}
 	}

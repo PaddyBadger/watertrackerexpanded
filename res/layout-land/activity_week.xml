@@ -91,15 +91,6 @@
 					    android:layout_height="wrap_content"
 					    android:orientation="vertical" 
 					    android:layout_gravity="bottom" >
-				
-						<Button
-						    android:id="@+id/month_button"
-						    style="?android:attr/buttonStyleSmall"
-						    android:layout_width="fill_parent"
-						    android:layout_height="wrap_content"
-						    android:layout_weight="1"
-						    android:text="@string/month"
-						      />
 					
 					    <Button
 					        android:id="@+id/week_button"
