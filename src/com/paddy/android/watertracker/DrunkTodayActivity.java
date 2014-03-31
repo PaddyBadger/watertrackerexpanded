@@ -3,14 +3,16 @@ package com.paddy.android.watertracker;
 import java.util.Arrays;
 import java.util.List;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class TodayDrunkActivity extends Activity{	
+public class DrunkTodayActivity extends Activity{	
 	public int[] checked = new int[9];
 	private int glassesCount = 0;
 	private int glassesToDrink = 9;
@@ -116,16 +118,28 @@ public class TodayDrunkActivity extends Activity{
 	
 	public void displayTracking (int glassesCount) {
 		if (glassesCount == 1) {
-            Toast.makeText(TodayDrunkActivity.this,  "Way to go! " + glassesCount + " Glass of water drunk today. " + glassesToDrink + " Left today. You should drink a glass of water every hour to reach the target",  Toast.LENGTH_SHORT).show();  
+            Toast.makeText(DrunkTodayActivity.this,  "Way to go! " + glassesCount + " Glass of water drunk today. " + glassesToDrink + " Left today. You should drink a glass of water every hour to reach the target",  Toast.LENGTH_SHORT).show();  
         
        } else if (glassesCount > 1 && glassesCount < 9){
-    	   Toast.makeText(TodayDrunkActivity.this,  "Way to go! " + glassesCount + " Glasses of water drunk today. "+ glassesToDrink + " Left today. You should drink a glass of water every hour to reach the target",  Toast.LENGTH_SHORT).show();  
+    	   Toast.makeText(DrunkTodayActivity.this,  "Way to go! " + glassesCount + " Glasses of water drunk today. "+ glassesToDrink + " Left today. You should drink a glass of water every hour to reach the target",  Toast.LENGTH_SHORT).show();  
        } else if (glassesCount == 0 ) {
-    	   Toast.makeText(TodayDrunkActivity.this,  "Better get drinking, you're on 0." ,  Toast.LENGTH_SHORT).show();
+    	   Toast.makeText(DrunkTodayActivity.this,  "Better get drinking, you're on 0." ,  Toast.LENGTH_SHORT).show();
        } else if (glassesCount == 9){
-    	   Toast.makeText(TodayDrunkActivity.this,  "Way to go! You have reached the target!" ,  Toast.LENGTH_SHORT).show();
+    	   Toast.makeText(DrunkTodayActivity.this,  "Way to go! You have reached the target!" ,  Toast.LENGTH_SHORT).show();
        }
 	}
+	
+	public void setAlarm() {
+		int hours = 1;
+		AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+		Intent i = new Intent(this, HandlerNotifications.class);
+		PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
+		am.cancel(pi);
+		am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, 
+				SystemClock.elapsedRealtime() + hours*60*60*1000, 
+				hours*60*60*1000, pi);
+	}
+		
 	
 }
 	

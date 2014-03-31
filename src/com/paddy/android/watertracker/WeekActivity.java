@@ -43,7 +43,7 @@ public class WeekActivity extends Activity {
 	}
 	
 	public void todayActivity(View v) {
-		Intent i = new Intent(this, TodayDrunkActivity.class);
+		Intent i = new Intent(this, DrunkTodayActivity.class);
 		startActivity(i);
 	}
 	

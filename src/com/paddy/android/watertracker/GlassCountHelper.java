@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.text.format.DateFormat;
-import android.util.Log;
 
 public final class GlassCountHelper {
 	private static final String SHARED_PREFS = "GlassesCountPrefs";
