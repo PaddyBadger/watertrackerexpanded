@@ -121,17 +121,24 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
+	        android:background="@drawable/button_selector"
 	        android:text="@string/week"
 	        style="@style/activityButtons"
+	        android:layout_marginRight="5dp"
+	        android:layout_marginLeft="5dp"
 	        android:onClick="weekActivity" />
 	
 	    <Button
 	        android:id="@+id/day_button"
 	        style="@style/activityButtons"
+	        android:background="@drawable/button_selector"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:text="@string/day" />
+	        android:text="@string/day"
+	        android:layout_marginLeft="5dp"
+	        android:layout_marginRight="5dp"
+	        android:state_focused="true" />
 	 </LinearLayout>
    
 </LinearLayout>

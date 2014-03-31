@@ -103,19 +103,26 @@
 	    <Button
 	        android:id="@+id/week_button"
 	        style="@style/activityButtons"
+	        android:background="@drawable/button_selector"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
-	        android:text="@string/week" />
+	        android:text="@string/week"
+	        android:state_focused="true"
+	         android:layout_marginRight="5dp"
+	        android:layout_marginLeft="5dp" />
 	
 	    <Button
 	        android:id="@+id/day_button"
 	        style="@style/activityButtons"
+	        android:background="@drawable/button_selector"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
 	        android:text="@string/day"
-	        android:onClick="todayActivity" />
+	        android:onClick="todayActivity"
+	         android:layout_marginRight="5dp"
+	        android:layout_marginLeft="5dp" />
 	 </LinearLayout>
    
 </LinearLayout>

@@ -37,10 +37,6 @@ public final class GlassCountHelper {
 		return getRecentGlasses(context, 9);
 	}
 	
-	public static Map<Date, Integer> getLastMonthsCheckedGlasses(Context context) {
-		return getRecentGlasses(context, 30);
-	}
-	
 	private static Map<Date, Integer> getRecentGlasses(Context context, int numberOfDays) {
 		SharedPreferences sharedPreferences = getSharedPreferences(context);
 	
