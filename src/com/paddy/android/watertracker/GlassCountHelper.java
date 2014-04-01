@@ -24,10 +24,10 @@ public final class GlassCountHelper {
 		List<Integer> checkedIndices = new ArrayList<Integer>();
 		
 		Date today = new Date();
-		for (int i = 1; i < NUM_GLASSES; i++) {
-			if (sharedPreferences.getBoolean(getKey(today, i), false)) {
-				checkedIndices.add(i);
-			}
+			for (int i = 1; i < NUM_GLASSES; i++) {
+				if (sharedPreferences.getBoolean(getKey(today, i), false)) {
+					checkedIndices.add(i);
+				}
 		}	
 		return checkedIndices;
 	}
