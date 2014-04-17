@@ -1,62 +1,59 @@
 package com.paddy.android.watertracker;
 
+import android.app.IntentService;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-public class HandlerNotifications extends Service {
+public class HandlerNotifications extends IntentService {
+	
+	public HandlerNotifications() {
+		super("HandlerNotifications");
+	}
 
-	public static final String TAG = "NH";
-	private WakeLock mWakeLock;
+	public NotificationCompat.Builder createNotification() {
+		
+		NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
+	
+			notificationBuilder.setSmallIcon(R.drawable.droplet);
+			notificationBuilder.setContentTitle("Water Tracker");
+			notificationBuilder.setContentText("Time to drink!");
+			notificationBuilder.setAutoCancel(true);
+	
+			Intent intent = new Intent(this, DrunkTodayActivity.class);
+	
+		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+		stackBuilder.addParentStack(DrunkTodayActivity.class);
+		stackBuilder.addNextIntent(intent);
+		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+	
+		resultPendingIntent.cancel();
+	
+		notificationBuilder.setContentIntent(resultPendingIntent);
+	
+		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		mNotificationManager.notify(0, notificationBuilder.build());
+		return notificationBuilder;
+	}
 
 	@Override
-	public IBinder onBind(Intent intent) {
-		return null;
+	protected void onHandleIntent(Intent intent) {
+		createNotification();	
+		
+		Intent broadcastIntent = new Intent();
+		broadcastIntent.setAction(ReceiveBoot.ACTION_RESP);
+		broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
+		sendBroadcast(broadcastIntent);
+		
 	}
-
-	@SuppressWarnings("deprecation")
-	public void handleIntent(Intent intent) {
-		PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
-		mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
-		mWakeLock.acquire();
-
-		ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-		if (!cm.getBackgroundDataSetting()) {
-			stopSelf();
-			return;
-		}
-		new NotificationTask().execute();
-	}
-
-	private class NotificationTask extends AsyncTask<Void, Void, Void> {
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			Log.i("doInBackground", "called");
-			startService(new Intent(HandlerNotifications.this, CreatorNotifications.class));
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			stopSelf();
-		}
-	}
-
-	public int onStartCommand(Intent intent, int flags, int startId) {
-		handleIntent(intent);
-		return START_NOT_STICKY;
-	}
-
-	public void onDestroy() {
-		super.onDestroy();
-		mWakeLock.release();
-	}
-
-
 }

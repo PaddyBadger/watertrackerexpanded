@@ -14,25 +14,40 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class DrunkTodayActivity extends Activity{	
-	public int[] checked = new int[9];
+	public Integer[] checked = new Integer[9];
 	private int glassesCount = 0;
 	private int glassesToDrink = 9;
+	private Integer[] buttonArray = {
+			R.id.one, R.id.two,
+			R.id.three, R.id.four,
+			R.id.five, R.id.six,
+			R.id.seven, R.id.eight,
+			R.id.nine
+	};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
 		setContentView(R.layout.activity_main);
 		setCheckedGlasses();
+		
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		setCheckedGlasses();
+		setAlarm();
 	}
 	
 	protected void onPause() {
-		super.onPause();	
+		super.onPause();
+	}
+	
+	protected void onDestroy() {
+		super.onDestroy();
+		for (int i = 0; i < checked.length;i++) {
+			Log.i("checked onDestroy", "" +checked[i]);
+		}
 	}
 	
 	public void weekActivity(View v) {
@@ -42,55 +57,17 @@ public class DrunkTodayActivity extends Activity{
 	
 	public void setCheckedGlasses() {
 		List<Integer> checkedGlasses = GlassCountHelper.getTodaysCheckedGlasses(this);
-		Log.i("i get called", ""+checkedGlasses);
+		Log.i("checkedGlasses array", "" +checkedGlasses);
 		
-		if (checkedGlasses.size() == 0) {
-			glassesCount = 0;
-			glassesToDrink = 9;
-			((ToggleButton) findViewById(R.id.one)).setChecked(false);
-			((ToggleButton) findViewById(R.id.two)).setChecked(false);
-			((ToggleButton) findViewById(R.id.three)).setChecked(false);
-			((ToggleButton) findViewById(R.id.four)).setChecked(false);
-			((ToggleButton) findViewById(R.id.five)).setChecked(false);
-			((ToggleButton) findViewById(R.id.six)).setChecked(false);
-			((ToggleButton) findViewById(R.id.seven)).setChecked(false);
-			((ToggleButton) findViewById(R.id.eight)).setChecked(false);
-			((ToggleButton) findViewById(R.id.nine)).setChecked(false);
-			
-		} else {
-			for (int i = 0; i < checkedGlasses.size(); i++ ) {
-				glassesCount ++;
-				glassesToDrink --;
-				
-				switch (checkedGlasses.get(i)) {
-				case 1: ((ToggleButton) findViewById(R.id.one)).setChecked(true); 
-						checked[0] = 1;
-						break;
-				case 2: ((ToggleButton) findViewById(R.id.two)).setChecked(true);
-						checked[1] = 2;
-						break;
-				case 3: ((ToggleButton) findViewById(R.id.three)).setChecked(true);
-						checked[2] = 3;
-						break;
-				case 4: ((ToggleButton) findViewById(R.id.four)).setChecked(true);
-						checked[3] = 4;
-						break;
-				case 5: ((ToggleButton) findViewById(R.id.five)).setChecked(true);
-						checked[4] = 5;	
-						break;
-				case 6: ((ToggleButton) findViewById(R.id.six)).setChecked(true);
-						checked[5] = 6;
-						break;
-				case 7: ((ToggleButton) findViewById(R.id.seven)).setChecked(true);
-						checked[6] = 7;
-						break;
-				case 8: ((ToggleButton) findViewById(R.id.eight)).setChecked(true);
-						checked[7] = 8;
-						break;
-				case 9: ((ToggleButton) findViewById(R.id.nine)).setChecked(true);
-						checked[8] = 9;
-						break;
-				}
+		for (int k = 0; k < buttonArray.length; k++) {
+			((ToggleButton) findViewById(buttonArray[k])).setChecked(false);
+			for (int i = 0; i < checkedGlasses.size(); i++) {
+				if (checkedGlasses.get(i) == k) {
+					glassesCount++;
+					glassesToDrink--;
+					checked[i] = k;
+					((ToggleButton) findViewById(buttonArray[k])).setChecked(true);
+				} 
 			}
 		}
 	}
@@ -102,37 +79,26 @@ public class DrunkTodayActivity extends Activity{
 			glassesCount ++;
 			glassesToDrink --;
 			displayTracking(glassesCount);
-			if (v == findViewById(R.id.one)) {checked[0] = 1; 
-			} else if (v == findViewById(R.id.two)) { checked[1] = 2;		
-			} else if (v == findViewById(R.id.three)) {checked[2] = 3;
-			} else if (v == findViewById(R.id.four)) { checked[3] = 4;
-			} else if (v == findViewById(R.id.five)) { checked[4] = 5;	
-			} else if (v == findViewById(R.id.six)) { checked[5] = 6;
-			} else if (v == findViewById(R.id.seven)) { checked[6] = 7;
-			} else if (v == findViewById(R.id.eight)) { checked[7] = 8;
-			} else if (v == findViewById(R.id.nine)) { checked[8] = 9;
+			for (int k = 0; k < buttonArray.length; k++) { 
+				if (v == findViewById(buttonArray[k])) {
+					checked[k] = k;
+				}
 			}
 			
 		} else {
 			glassesCount --;
 			glassesToDrink ++;
 			displayTracking(glassesCount);
-			if (v == findViewById(R.id.one)) { checked[0] = 0;
-			} else if (v == findViewById(R.id.two)) { checked[1] = 0;
-			} else if (v == findViewById(R.id.three)) { checked[2] = 0;
-			} else if (v == findViewById(R.id.four)) { checked[3] = 0;
-			} else if (v == findViewById(R.id.five)) { checked[4] = 0;
-			} else if (v == findViewById(R.id.six)) { checked[5] = 0;
-			} else if (v == findViewById(R.id.seven)) { checked[6] = 0;
-			} else if (v == findViewById(R.id.eight)) { checked[7] = 0;
-			} else if (v == findViewById(R.id.nine)) { checked[8] = 0;
-			}
+			for (int k = 0; k < buttonArray.length; k++) { 
+				if (v == findViewById(buttonArray[k])) { 
+					checked[k] = 0;
+				}
+			}	
 		}
 		GlassCountHelper.setTodaysCheckedGlasses(this, Arrays.asList(checked[0], checked[1], checked[2], 
-																	 checked[3], checked[4], checked[5], 
-																	 checked[6], checked[7], checked[8]));
-		
-	}
+				 checked[3], checked[4], checked[5], 
+				 checked[6], checked[7], checked[8]));
+	}	
 	
 	public void displayTracking (int glassesCount) {
 		if (glassesCount == 1) {

@@ -2,11 +2,12 @@ package com.paddy.android.watertracker;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.SystemClock;
 
-public class ReceiveBoot {
+public class ReceiveBoot extends BroadcastReceiver {
+	public static String ACTION_RESP = "Action processed";
 	
 	public void onReceive(Context context, Intent intent) {
 		
@@ -17,8 +18,8 @@ public class ReceiveBoot {
 		am.cancel(pi);
 		
 		am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, 
-				SystemClock.elapsedRealtime() + hours*60*30*1000, 
-				hours*60*30*1000, pi);
+				hours*60*60*1000, 
+				hours*60*60*1000, pi);
 			
 		
 	}

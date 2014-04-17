@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="15"
+        android:minSdkVersion="16"
         android:targetSdkVersion="19" />
     
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -35,7 +35,7 @@
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </service>
-        <receiver android:name="com.paddy.android.watertracker.ReveiceBoot">
+        <receiver android:name="com.paddy.android.watertracker.ReceiveBoot">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
